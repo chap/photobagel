@@ -1,24 +1,12 @@
-<h1>Listing users</h1>
-
-<table>
-  <tr>
-    <th>Full email</th>
-    <th>Email name</th>
-    <th>Permalink</th>
-  </tr>
-
-<% @users.each do |user| %>
-  <tr>
-    <td><%=h user.full_email %></td>
-    <td><%=h user.email_name %></td>
-    <td><%=h user.permalink %></td>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New user', new_user_path %>
+<%= image_tag('home.png')%>
+<div class="yui-gb" style="text-align:center;">
+	<div class="yui-u first">
+		<h2><br />Take a neat photo today</h2>
+	</div>
+	<div class="yui-u">
+		<h2>Email it to photobagel@gmail.com</h2>
+	</div>
+	<div class="yui-u">
+		<h2><br />Try and do it everyday</h2>
+	</div>
+</div>

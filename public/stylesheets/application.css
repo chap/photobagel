@@ -1,0 +1,47 @@
+html, body {
+	background: #222;
+	color: #fff;
+}
+
+#hd {
+	margin-bottom: 1em;
+	padding: 1em 0;
+	border-bottom: 1px solid #000;
+
+}
+
+#bd {
+	margin-bottom: 2em;
+	padding-bottom: 2em;
+}
+
+#ft {
+	padding: 1em;
+	background: #111;
+	color: #666;
+	font-size: 88%;
+}
+
+#ft a{
+	color: #666;
+	text-decoration: underline;
+}
+
+#ft a:hover{
+	color: #fff;
+}
+
+h1 {
+	font-size: 167%;
+	font-weight: bold;
+}
+
+h2 {
+	font-size: 131%;
+}
+
+h1 span {
+	font-weight: normal;
+	color: #ccc;
+	font-size: .8em;
+}
