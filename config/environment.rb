@@ -42,4 +42,14 @@ Rails::Initializer.run do |config|
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
+
+	ActionMailer::Base.smtp_settings = {
+	  :enable_starttls_auto => true,
+	  :address => 'smtp.gmail.com',
+	  :port => 587,
+	  :domain => 'photobagel.com',
+	  :authentication => :plain,
+	  :user_name => 'chap@photobagel.com',
+	  :password => 'benz626\sign'
+	}
 end

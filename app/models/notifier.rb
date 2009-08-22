@@ -1,19 +1,17 @@
 class Notifier < ActionMailer::Base
   
 
-  def welcome(user, photo)
+  def welcome(user)
     subject    '[PhotoBagel] Welcome to PhotoBagel'
     recipients user.full_email
-    from       ''
-    body       :user => user, :photo => photo
+    from       'Chap Ambrose <chap@photobagel.com>'
+    body       :user => user
   end
 
   def duplicate(user, photo)
     subject    '[PhotoBagel] You already sent us a photo for this day.'
     recipients user.full_email
-    from       ''
-    sent_on    sent_at
-    
+    from       'Chap Ambrose <chap@photobagel.com>'
     body       :greeting => 'Hi,'
   end
 

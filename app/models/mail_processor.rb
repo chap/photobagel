@@ -5,8 +5,14 @@ class MailProcessor < ActionMailer::Base
 		puts "Receiving a message with the subject '#{mail.subject}' from '#{from}'"
 		
 		user = User.find_by_full_email(from)
-		user = User.create(:full_email => mail.from_addrs.first.address,
-											 :email_name => MailProcessor.email_name(from)) unless user
+		unless
+			user = User.create(:full_email => mail.from_addrs.first.address,
+												 :email_name => MailProcessor.email_name(from))
+			begin
+				Notifier.deliver_welcome(user)
+			rescue
+			end
+		end
 		
 		mms = MMS2R::Media.new(mail)
 		images = []
