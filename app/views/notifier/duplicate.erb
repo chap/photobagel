@@ -1,0 +1,15 @@
+Ooops. You've already sent us a picture for <%= @photo.taken_at.strftime("%D") %>.
+
+PhotoBagel is all about 1 picture per day.
+
+I went ahead and replaced the old one with the on you just sent. See it here:
+<%= photo_url(@user, @photo)%>
+
+**Nerd Alert
+We look for EXIF data on the photograph to figure out which day you took the photo.
+However, most phones don't give us this info, so we just assign it to the day you
+emailed it to us.
+
+If you have any questions, or keep having problems let me know:
+Chap Ambrose
+chapambrose@gmail.com

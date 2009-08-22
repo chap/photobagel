@@ -19,7 +19,7 @@ class MailProcessor < ActionMailer::Base
 				photo = user.photos.new(:name => mms.subject,
 														 :description => mms.body,
 														 :image => File.new(image))
-				photo.taken_at = image_info.date_time ? image_info.date_time : Time.now
+				photo.taken_at = image_info.date_time ? image_info.date_time.to_date : Date.today
 				photo.camera_model = image_info.model if image_info.model
 				photo.latitude = MailProcessor.dms_degrees(image_info.exif.gps_latitude, image_info.exif.gps_latitude_ref) if image_info.exif.gps_latitude
 				photo.longitude = MailProcessor.dms_degrees(image_info.exif.gps_longitude, image_info.exif.gps_longitude_ref) if image_info.exif.gps_longitude
@@ -51,7 +51,7 @@ class MailProcessor < ActionMailer::Base
 				photo = user.photos.new(:name => mms.subject,
 														 :description => mms.body,
 														 :image => File.new(image))
-				photo.taken_at = image_info.date_time ? image_info.date_time : Time.now
+				photo.taken_at = image_info.date_time ? image_info.date_time.to_date : Date.today
 				photo.camera_model = image_info.model if image_info.model
 				photo.latitude = MailProcessor.dms_degrees(image_info.exif.gps_latitude, image_info.exif.gps_latitude_ref) if image_info.exif.gps_latitude
 				photo.longitude = MailProcessor.dms_degrees(image_info.exif.gps_longitude, image_info.exif.gps_longitude_ref) if image_info.exif.gps_longitude

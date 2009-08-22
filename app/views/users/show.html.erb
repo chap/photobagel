@@ -1,18 +1,23 @@
-<p>
-  <b>Full email:</b>
-  <%=h @user.full_email %>
-</p>
-
-<p>
-  <b>Email name:</b>
-  <%=h @user.email_name %>
-</p>
-
-<p>
-  <b>Permalink:</b>
-  <%=h @user.permalink %>
-</p>
-
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<div class="yui-ge">
+	<div class="yui-u first" style="overflow:hidden">
+		<%= image_tag @photo.image.url(:large) %>
+	</div>
+	<div class="yui-u">
+		<% @user.months.each do |month, days| %>
+			<h4 class="month"><%= month.strftime("%B %y")%></h4>
+			<% days.reverse.each do |day| %>
+				<% if days.last == day %>
+				<%= ('&nbsp; &nbsp; &nbsp;' * day.cwday) if day.cwday < 7%>
+				<% end %>
+				<% if @photo.taken_at == day %>
+					<%= image_tag('dot_white.png', :title => day.strftime("%A %D"))%>
+				<% elsif @user.days_with_photos.include?(day) %>
+					<%= link_to image_tag('dot_orange.png'), photo_path(@user, day), :title => day.strftime("%A %D")%>
+				<% else %>
+					<%= image_tag('dot_outline.png', :title => day.strftime("%A %D")) %>
+				<% end %>
+				<%= '<br />' if day.cwday == 6 %>
+			<% end %>
+		<% end %>
+	</div>
+</div>

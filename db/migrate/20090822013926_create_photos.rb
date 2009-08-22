@@ -4,8 +4,8 @@ class CreatePhotos < ActiveRecord::Migration
       t.references :user
       t.string :name
       t.text :description
-      t.datetime :taken_at
-      t.string :direction, :camera_model, :comment
+      t.date :taken_at
+      t.string :camera_model
 			
 			t.decimal :longitude, :precision => 15, :scale => 10
 			t.decimal :latitude, :precision => 15, :scale => 10

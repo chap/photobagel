@@ -3,9 +3,7 @@ class Photo < ActiveRecord::Base
 
 	has_attached_file :image,
                     :styles => {
-                      :large => ['500x500>', :jpg],
-                      :medium => ['112x151>', :jpg],
-                      :thumb => ['50x50#', :jpg]
+                      :large => ['550x550>', :jpg]
                     },
                     :storage => :s3, 
                     :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml",
@@ -13,4 +11,8 @@ class Photo < ActiveRecord::Base
 										:path => ":class/:id/:basename_:style.:extension"
   
   validates_attachment_size :image, :in => 100..2000.kilobytes
+
+	def to_params
+		taken_at
+	end
 end

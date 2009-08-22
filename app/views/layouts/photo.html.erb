@@ -11,10 +11,10 @@
 </head>
 
 <body>
-<div id="doc">
-	<div id="hd">
-		<h1><%=  image_tag('bagel_white.png', :style => 'vertical-align: text-bottom;') %> PhotoBagel <span>made fresh daily</span></h1>
-	</div>
+<div id="hd" class="show">
+	<h1><%= link_to image_tag('bagel.png', :style => 'vertical-align: text-bottom;'), root_url, :title => 'PhotoBagel' %></h1>
+</div>
+<div id="doc3">
 	<div id="bd">
 		<%= yield %>
 	</div>

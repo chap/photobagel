@@ -3,11 +3,34 @@ html, body {
 	color: #fff;
 }
 
+h4.month {
+	padding: .5em;
+	
+}
+
+span.highlight {
+	color: #111;
+	background: #d8611e;
+	font-weight: bold;
+	padding: .2em;
+	letter-spacing: 1px;
+}
+
 #hd {
 	margin-bottom: 1em;
 	padding: 1em 0;
 	border-bottom: 1px solid #000;
 
+}
+
+#hd.show {
+	background: #111;
+	text-align: left;
+	padding: .5em;
+}
+
+#hd.show h1 a:hover{
+	background: none;
 }
 
 #bd {
@@ -16,14 +39,15 @@ html, body {
 }
 
 #ft {
+	border-top: solid #333 1px;
 	padding: 1em;
-	background: #111;
-	color: #666;
-	font-size: 88%;
+	color: #333;
+	font-size: 83%;
+	text-align: center;
 }
 
 #ft a{
-	color: #666;
+	color: #333	;
 	text-decoration: underline;
 }
 
@@ -35,6 +59,16 @@ h1 {
 	font-size: 167%;
 	font-weight: bold;
 }
+
+#hd h1 a{
+	color: #fff;
+	text-decoration: none;
+}
+
+#hd h1 a:hover{
+	background: #A44A17;
+}
+
 
 h2 {
 	font-size: 131%;
