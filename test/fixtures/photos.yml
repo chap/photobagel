@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user: 
+  name: MyString
+  description: MyText
+  taken_at: 2009-08-21 21:39:26
+  longitude: MyString
+  latitude: MyString
+  direction: MyString
+
+two:
+  user: 
+  name: MyString
+  description: MyText
+  taken_at: 2009-08-21 21:39:26
+  longitude: MyString
+  latitude: MyString
+  direction: MyString
