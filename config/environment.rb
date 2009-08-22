@@ -18,10 +18,11 @@ Rails::Initializer.run do |config|
   # config.gem "bj"
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
-  # config.gem "aws-s3", :lib => "aws/s3"
+  config.gem "aws-s3", :lib => "aws/s3"
 	config.gem 'thoughtbot-paperclip', :lib => 'paperclip', :source => 'http://gems.github.com'
 	config.gem 'tmail'
 	config.gem 'monde-mms2r', :lib => 'mms2r', :source => 'http://gems.github.com'
+	config.gem 'remvee-exifr', :lib => 'exifr', :source => 'http://gems.github.com'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
