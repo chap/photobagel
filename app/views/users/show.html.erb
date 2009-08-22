@@ -1,0 +1,18 @@
+<p>
+  <b>Full email:</b>
+  <%=h @user.full_email %>
+</p>
+
+<p>
+  <b>Email name:</b>
+  <%=h @user.email_name %>
+</p>
+
+<p>
+  <b>Permalink:</b>
+  <%=h @user.permalink %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
