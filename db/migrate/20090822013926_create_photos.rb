@@ -8,7 +8,11 @@ class CreatePhotos < ActiveRecord::Migration
       t.string :longitude
       t.string :latitude
       t.string :direction
-
+			
+			t.string :image_file_name, :image_content_type
+			t.integer :image_file_size
+			t.datetime :image_updated_at
+			
       t.timestamps
     end
   end
