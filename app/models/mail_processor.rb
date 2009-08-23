@@ -1,6 +1,6 @@
 class MailProcessor < ActionMailer::Base
 	
-	def self.receive(mail)
+	def receive(mail)
 		logger.info "Message received."
 		puts "Message received."
 	end
