@@ -1,22 +1,28 @@
 <div class="yui-ge">
 	<div class="yui-u first" style="overflow:hidden">
-		<%= image_tag @photo.image.url(:large) %>
+		<% if @photo %>
+			<%= image_tag @photo.image.url(:large) %>
+		<% else %>
+		 No photos have been successfully uploaded yet. Send them to photobagel@gmail.com
+		<% end %>
 	</div>
 	<div class="yui-u">
-		<% @user.months.each do |month, days| %>
-			<h4 class="month"><%= month.strftime("%B %y")%></h4>
-			<% days.reverse.each do |day| %>
-				<% if days.last == day %>
-				<%= ('&nbsp; &nbsp; &nbsp;' * day.cwday) if day.cwday < 7%>
+		<% if @photo %>
+			<% @user.months.each do |month, days| %>
+				<h4 class="month"><%= month.strftime("%B %y")%></h4>
+				<% days.reverse.each do |day| %>
+					<% if days.last == day %>
+					<%= ('&nbsp; &nbsp; &nbsp;' * day.cwday) if day.cwday < 7%>
+					<% end %>
+					<% if @photo.taken_at == day %>
+						<%= image_tag('dot_white.png', :title => day.strftime("%A %D"))%>
+					<% elsif @user.days_with_photos.include?(day) %>
+						<%= link_to image_tag('dot_orange.png'), photo_path(@user, day), :title => day.strftime("%A %D")%>
+					<% else %>
+						<%= image_tag('dot_outline.png', :title => day.strftime("%A %D")) %>
+					<% end %>
+					<%= '<br />' if day.cwday == 6 %>
 				<% end %>
-				<% if @photo.taken_at == day %>
-					<%= image_tag('dot_white.png', :title => day.strftime("%A %D"))%>
-				<% elsif @user.days_with_photos.include?(day) %>
-					<%= link_to image_tag('dot_orange.png'), photo_path(@user, day), :title => day.strftime("%A %D")%>
-				<% else %>
-					<%= image_tag('dot_outline.png', :title => day.strftime("%A %D")) %>
-				<% end %>
-				<%= '<br />' if day.cwday == 6 %>
 			<% end %>
 		<% end %>
 	</div>
