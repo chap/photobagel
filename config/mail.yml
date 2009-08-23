@@ -7,7 +7,6 @@ development:
   ssl: true
   username: photobagel@gmail.com
   password: Jose897}Moor
-  receiver: MailProcessor
   
 production:
   type: imap
@@ -18,4 +17,3 @@ production:
   ssl: true
   username: photobagel@gmail.com
   password: Jose897}Moor
-  receiver: MailProcessor

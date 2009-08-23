@@ -4,9 +4,6 @@ module Fetcher
   class Imap < Base
     
     PORT = 143
-
-		@logger = Logger.new("#{RAILS_ROOT}/log/mails.#{Rails.env}.log")
-		@logger.level = Logger::INFO
     
     protected
     
@@ -47,8 +44,7 @@ module Fetcher
           process_message(msg)
           add_to_processed_folder(uid) if @processed_folder
         rescue => ex
-					@logger.info("Something went wrong")
-					#Rails.logger.info 'something went wrong'
+					Rails.logger.info 'something went wrong'
 					#Rails.logger.error(ex)
           handle_bogus_message(msg)
         end
