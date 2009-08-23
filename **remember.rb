@@ -1,3 +1,7 @@
+69.164.192.66
+ssh -L 8888:localhost:3306 deploy@ssh -L 8888:localhost:3306 root@69.164.192.66 
+glow7/assents
+
 apache2/conf.d/restart
 mysqladmin -u root
 CREATE DATABASE photobagel_production

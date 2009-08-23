@@ -12,7 +12,7 @@ class MailProcessor < ActionMailer::Base
 			Notifier.deliver_welcome(user)
 		end
 		
-		mms = MMS2R::Media.new(mail)
+		mms = MMS2R::Media.new(mail, :logger => Rails.logger)
 		images = []
 		images += mms.media['image/jpeg'] unless mms.media['image/jpeg'].nil?
 		images += mms.media['image/jpg'] unless mms.media['image/jpg'].nil?
@@ -43,7 +43,7 @@ class MailProcessor < ActionMailer::Base
 	end
 	
 	def self.test
-		mail = TMail::Mail.load('~/Desktop/test.mail')
+		mail = TMail::Mail.load("#{RAILS_ROOT}/public/test.mail")
 		from = mail.from_addrs.first.address
 		puts "Receiving a message with the subject '#{mail.subject}' from '#{from}'"
 		
@@ -51,11 +51,11 @@ class MailProcessor < ActionMailer::Base
 		unless user
 			user = User.create(:full_email => mail.from_addrs.first.address,
 												 :email_name => MailProcessor.email_name(from))
-			puts 'sending welcome email'
+			puts 'Creating new user. Sending welcome email'
 			Notifier.deliver_welcome(user)
 		end
 		
-		mms = MMS2R::Media.new(mail)
+		mms = MMS2R::Media.new(mail, :logger => puts)
 		images = []
 		images += mms.media['image/jpeg'] unless mms.media['image/jpeg'].nil?
 		images += mms.media['image/jpg'] unless mms.media['image/jpg'].nil?
@@ -75,6 +75,8 @@ class MailProcessor < ActionMailer::Base
 				photo.save
 				
 				if exisiting_photo
+					puts 'Exisiting photo found.'
+					puts 'Deleting old photo and sending warning email.'
 					exisiting_photo.destroy
 					Notifier.deliver_duplicate(user, photo)
 				end
