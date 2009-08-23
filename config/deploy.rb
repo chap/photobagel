@@ -5,7 +5,7 @@ set :repository,  "git@github.com:railsrumble/rr09-team-226.git"
 set :scm, "git"
 set :scm_passphrase, "chug0misact"
 set :user, "root"
-set :runner, "root"
+set :runner, user
 set :branch, "master"
 
 set :deploy_to, "/var/www/#{application}"
