@@ -8,7 +8,7 @@ class MailProcessor < ActionMailer::Base
 		unless user
 			user = User.create(:full_email => from,
 												 :email_name => MailProcessor.email_name(from))
-			logger.info 'sending welcome email'
+			puts 'sending welcome email'
 			Notifier.deliver_welcome(user)
 		end
 		
@@ -52,7 +52,7 @@ class MailProcessor < ActionMailer::Base
 		unless user
 			user = User.create(:full_email => from,
 												 :email_name => MailProcessor.email_name(from))
-			logger.info 'sending welcome email'
+			puts 'sending welcome email'
 			Notifier.deliver_welcome(user)
 		end
 		
