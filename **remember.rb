@@ -28,3 +28,6 @@ CREATE DATABASE photobagel_production DEFAULT CHARACTER SET utf8;
 
 a2ensite example.conf
 /etc/init.d/apache2 reload
+
+# watch for updates
+tail -f production.log

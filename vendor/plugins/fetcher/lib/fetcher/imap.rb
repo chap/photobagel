@@ -44,8 +44,8 @@ module Fetcher
           process_message(msg)
           add_to_processed_folder(uid) if @processed_folder
         rescue => ex
-					Rails.logger.info 'something went wrong'
-					#Rails.logger.error(ex)
+					#Rails.logger.info 'something went wrong'
+					Rails.logger.error(ex)
           handle_bogus_message(msg)
         end
         # Mark message as deleted 
