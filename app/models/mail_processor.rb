@@ -5,13 +5,11 @@ class MailProcessor < ActionMailer::Base
 		puts "Receiving a message with the subject '#{mail.subject}' from '#{from}'"
 		
 		user = User.find_by_full_email(from)
-		unless
+		unless user
 			user = User.create(:full_email => mail.from_addrs.first.address,
 												 :email_name => MailProcessor.email_name(from))
-			begin
-				Notifier.deliver_welcome(user)
-			rescue
-			end
+			puts 'sending welcome email'
+			Notifier.deliver_welcome(user)
 		end
 		
 		mms = MMS2R::Media.new(mail)
@@ -22,14 +20,21 @@ class MailProcessor < ActionMailer::Base
 		images.each do |image|
 			begin
 				image_info = EXIFR::JPEG.new(image)
+				exisiting_photo = Photo.find_by_taken_at(MailProcessor.taken_at(image_info))
+				
 				photo = user.photos.new(:name => mms.subject,
 														 :description => mms.body,
 														 :image => File.new(image))
-				photo.taken_at = image_info.date_time ? image_info.date_time.to_date : Date.today
+				photo.taken_at = MailProcessor.taken_at(image_info)
 				photo.camera_model = image_info.model if image_info.model
 				photo.latitude = MailProcessor.dms_degrees(image_info.exif.gps_latitude, image_info.exif.gps_latitude_ref) if image_info.exif.gps_latitude
 				photo.longitude = MailProcessor.dms_degrees(image_info.exif.gps_longitude, image_info.exif.gps_longitude_ref) if image_info.exif.gps_longitude
 				photo.save
+				
+				if exisiting_photo
+					exisiting_photo.destroy
+					Notifier.deliver_duplicate(user, photo)
+				end
 			rescue => e
 				puts e
 			end
@@ -43,8 +48,12 @@ class MailProcessor < ActionMailer::Base
 		puts "Receiving a message with the subject '#{mail.subject}' from '#{from}'"
 		
 		user = User.find_by_full_email(from)
-		user = User.create(:full_email => mail.from_addrs.first.address,
-											 :email_name => MailProcessor.email_name(from)) unless user
+		unless user
+			user = User.create(:full_email => mail.from_addrs.first.address,
+												 :email_name => MailProcessor.email_name(from))
+			puts 'sending welcome email'
+			Notifier.deliver_welcome(user)
+		end
 		
 		mms = MMS2R::Media.new(mail)
 		images = []
@@ -54,14 +63,21 @@ class MailProcessor < ActionMailer::Base
 		images.each do |image|
 			begin
 				image_info = EXIFR::JPEG.new(image)
+				exisiting_photo = Photo.find_by_taken_at(MailProcessor.taken_at(image_info))
+				
 				photo = user.photos.new(:name => mms.subject,
 														 :description => mms.body,
 														 :image => File.new(image))
-				photo.taken_at = image_info.date_time ? image_info.date_time.to_date : Date.today
+				photo.taken_at = MailProcessor.taken_at(image_info)
 				photo.camera_model = image_info.model if image_info.model
 				photo.latitude = MailProcessor.dms_degrees(image_info.exif.gps_latitude, image_info.exif.gps_latitude_ref) if image_info.exif.gps_latitude
 				photo.longitude = MailProcessor.dms_degrees(image_info.exif.gps_longitude, image_info.exif.gps_longitude_ref) if image_info.exif.gps_longitude
 				photo.save
+				
+				if exisiting_photo
+					exisiting_photo.destroy
+					Notifier.deliver_duplicate(user, photo)
+				end
 			rescue => e
 				puts e
 			end
@@ -78,5 +94,9 @@ class MailProcessor < ActionMailer::Base
 	def self.email_name(email)
 		e = email.split('@')
 		email = e[0]
+	end
+	
+	def self.taken_at(image_info)
+		image_info.date_time ? image_info.date_time.to_date : Date.today
 	end
 end
