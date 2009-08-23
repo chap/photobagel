@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../vendor/plain_imap'
 
 module Fetcher
   class Imap < Base
-    
+		
     PORT = 143
     
     protected
@@ -36,17 +36,16 @@ module Fetcher
     
     # Retrieve messages from server
     def get_messages
-			ActiveRecord::Base.logger << 'getting the messages'
+			puts 'getting messages'
       @connection.select('INBOX')
       @connection.uid_search(['ALL']).each do |uid|
         msg = @connection.uid_fetch(uid,'RFC822').first.attr['RFC822']
         begin
-					@logger.info("Processing msg")
+					puts 'processing message...'
           process_message(msg)
           add_to_processed_folder(uid) if @processed_folder
         rescue => ex
-					#Rails.logger.info 'something went wrong'
-					Rails.logger.error(ex)
+					puts "error: #{ex}"
           handle_bogus_message(msg)
         end
         # Mark message as deleted 
