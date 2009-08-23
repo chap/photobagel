@@ -43,7 +43,7 @@ class MailProcessor < ActionMailer::Base
 	end
 	
 	def self.test
-		mail = TMail::Mail.load('~/Desktop/test2.mail')
+		mail = TMail::Mail.load('~/Desktop/test.mail')
 		from = mail.from_addrs.first.address
 		puts "Receiving a message with the subject '#{mail.subject}' from '#{from}'"
 		
