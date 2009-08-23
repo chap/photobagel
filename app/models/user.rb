@@ -2,11 +2,11 @@ class User < ActiveRecord::Base
 	has_many :photos
 	has_permalink :email_name
 	
-	after_create :send_welcome_email
+	#after_create :send_welcome_email
 	
-	def send_welcome_email
-		Notifier.deliver_welcome(self)
-	end
+	#def send_welcome_email
+	#	Notifier.deliver_welcome(self)
+	#end
 	
 	def	to_param
 		permalink
