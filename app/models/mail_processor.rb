@@ -43,7 +43,7 @@ class MailProcessor < ActionMailer::Base
 	end
 	
 	def self.test
-		mail = TMail::Mail.load("#{RAILS_ROOT}/public/test.mail")
+		mail = TMail::Mail.load("/var/www/photobagel.com/current/public/test.mail")
 		from = mail.from_addrs.first.address
 		puts "Receiving a message with the subject '#{mail.subject}' from '#{from}'"
 		
