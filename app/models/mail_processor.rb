@@ -3,7 +3,6 @@ class MailProcessor < ActionMailer::Base
 	def receive(mail)
 		puts "successfully passed to MailProcessor..."
 		from = mail.from_addrs.first.address
-		logger.info "Receiving a message with the subject '#{mail.subject}' from '#{from}'"
 		
 		user = User.find_by_full_email(from)
 		unless user
@@ -33,7 +32,7 @@ class MailProcessor < ActionMailer::Base
 				photo.save
 				
 				if exisiting_photo
-					logger.info 'Duplicate photo found. Deleting and sending warning email.'
+					puts 'Duplicate photo found. Deleting and sending warning email.'
 					exisiting_photo.destroy
 					Notifier.deliver_duplicate(user, photo)
 				end
@@ -47,7 +46,7 @@ class MailProcessor < ActionMailer::Base
 	def self.test
 		mail = TMail::Mail.load("public/test.mail")
 		from = mail.from_addrs.first.address
-		logger.info "Receiving a message with the subject '#{mail.subject}' from '#{from}'"
+		puts "Receiving a message with the subject '#{mail.subject}' from '#{from}'"
 		
 		user = User.find_by_full_email(from)
 		unless user
@@ -77,7 +76,7 @@ class MailProcessor < ActionMailer::Base
 				photo.save
 				
 				if exisiting_photo
-					logger.info 'Duplicate photo found. Deleting and sending warning email.'
+					puts 'Duplicate photo found. Deleting and sending warning email.'
 					exisiting_photo.destroy
 					Notifier.deliver_duplicate(user, photo)
 				end
