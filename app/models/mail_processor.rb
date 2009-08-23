@@ -8,8 +8,6 @@ class MailProcessor < ActionMailer::Base
 		unless user
 			user = User.create(:full_email => from,
 												 :email_name => MailProcessor.email_name(from))
-			# puts 'sending welcome email'
-			Notifier.deliver_welcome(user)
 		end
 		
 		mms = MMS2R::Media.new(mail, :logger => Rails.logger)

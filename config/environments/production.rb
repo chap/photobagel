@@ -26,3 +26,6 @@ config.action_mailer.raise_delivery_errors = false
 
 # Enable threaded mode
 # config.threadsafe!
+
+config.action_mailer.perform_deliveries = true
+config.action_mailer.delivery_method = :smtp
