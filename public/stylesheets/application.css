@@ -8,6 +8,17 @@ h4.month {
 	
 }
 
+h3 {
+	font-size: 131%;
+	font-weight: bold;
+}
+
+h4 {
+	color: #eee;
+	font-size: 116%;
+	font-weight: bold;
+}
+
 span.highlight {
 	color: #111;
 	background: #d8611e;
@@ -15,6 +26,10 @@ span.highlight {
 	padding: .1em;
 	letter-spacing: 1px;
 	vertical-align: ;
+}
+
+p {
+	margin-bottom: 1em;
 }
 
 #hd {
@@ -77,6 +92,6 @@ h2 {
 
 h1 span {
 	font-weight: normal;
-	color: #ccc;
+	color: #777;
 	font-size: .8em;
 }
