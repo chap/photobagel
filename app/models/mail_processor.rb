@@ -1,14 +1,14 @@
 class MailProcessor < ActionMailer::Base
 	
 	def receive(mail)
-		puts "successfully passed to MailProcessor..."
+		# puts "successfully passed to MailProcessor..."
 		from = mail.from_addrs.first.address
 		
 		user = User.find_by_full_email(from)
 		unless user
 			user = User.create(:full_email => from,
 												 :email_name => MailProcessor.email_name(from))
-			puts 'sending welcome email'
+			# puts 'sending welcome email'
 			Notifier.deliver_welcome(user)
 		end
 		
@@ -32,12 +32,12 @@ class MailProcessor < ActionMailer::Base
 				photo.save
 				
 				if exisiting_photo
-					puts 'Duplicate photo found. Deleting and sending warning email.'
+					# puts 'Duplicate photo found. Deleting and sending warning email.'
 					exisiting_photo.destroy
 					Notifier.deliver_duplicate(user, photo)
 				end
 			rescue => e
-				puts e
+				# puts e
 			end
 		end
 		mms.purge
@@ -46,13 +46,13 @@ class MailProcessor < ActionMailer::Base
 	def self.test
 		mail = TMail::Mail.load("public/test.mail")
 		from = mail.from_addrs.first.address
-		puts "Receiving a message with the subject '#{mail.subject}' from '#{from}'"
+		# puts "Receiving a message with the subject '#{mail.subject}' from '#{from}'"
 		
 		user = User.find_by_full_email(from)
 		unless user
 			user = User.create(:full_email => from,
 												 :email_name => MailProcessor.email_name(from))
-			puts 'sending welcome email'
+			# puts 'sending welcome email'
 			Notifier.deliver_welcome(user)
 		end
 		
@@ -76,12 +76,12 @@ class MailProcessor < ActionMailer::Base
 				photo.save
 				
 				if exisiting_photo
-					puts 'Duplicate photo found. Deleting and sending warning email.'
+					# puts 'Duplicate photo found. Deleting and sending warning email.'
 					exisiting_photo.destroy
 					Notifier.deliver_duplicate(user, photo)
 				end
 			rescue => e
-				puts e
+				# puts e
 			end
 		end
 		mms.purge
@@ -89,16 +89,16 @@ class MailProcessor < ActionMailer::Base
 	
 	def self.import_chaps
 		images = Dir.new("public/chaps").entries
-		puts images
+		# puts images
 		images.each do |i|
 			image = "public/chaps/#{i}"
-			puts image
+			# puts image
 			
 			begin
-				puts 'exif'
+				# puts 'exif'
 				image_info = EXIFR::JPEG.new(image)
 				
-				puts 'create photo'
+				# puts 'create photo'
 				photo = Photo.new(:image => File.new(image),
 													:user_id => 1)
 				photo.taken_at = MailProcessor.taken_at(image_info)
@@ -106,10 +106,10 @@ class MailProcessor < ActionMailer::Base
 				photo.latitude = MailProcessor.dms_degrees(image_info.exif.gps_latitude, image_info.exif.gps_latitude_ref) if image_info.exif.gps_latitude
 				photo.longitude = MailProcessor.dms_degrees(image_info.exif.gps_longitude, image_info.exif.gps_longitude_ref) if image_info.exif.gps_longitude
 				photo.save
-				puts 'photo saved'
+				# puts 'photo saved'
 				
 			rescue => e
-				puts e
+				# puts e
 			end
 		end
 	end
