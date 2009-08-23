@@ -38,4 +38,7 @@ Rails::Initializer.run do |config|
   # Run "rake -D time" for a list of tasks for finding time zone names.
   config.time_zone = 'UTC'
 
+	config.action_mailer.raise_delivery_errors = true
+	config.action_mailer.perform_deliveries = true
+	config.action_mailer.delivery_method = :smtp
 end
