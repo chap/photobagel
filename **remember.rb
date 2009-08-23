@@ -10,6 +10,8 @@ CREATE DATABASE photobagel_production
 ssh-keygen -t dsa
 cat id_dsa.pub
 
+scp ~/.ssh/id_dsa.pub root@69.164.192.66:.ssh/authorized_keys
+
 gem sources -a http://gems.github.com
 sudo gem install monde-mms2r
 sudo gem install aws-s3
