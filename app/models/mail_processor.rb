@@ -1,16 +1,8 @@
 class MailProcessor < ActionMailer::Base
 	
 	def receive(mail)
-		from = mail.from_addrs.first.address
-		logger.info "Receiving a message with the subject '#{mail.subject}' from '#{from}'"
-		
-		user = User.find_by_full_email(from)
-		unless user
-			user = User.create(:full_email => from,
-												 :email_name => MailProcessor.email_name(from))
-			puts 'sending welcome email'
-			Notifier.deliver_welcome(user)
-		end
+		logger.info "Message received."
+		puts "Message received."
 	end
 	
 	def self.test
