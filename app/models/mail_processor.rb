@@ -87,33 +87,6 @@ class MailProcessor < ActionMailer::Base
 		mms.purge
 	end
 	
-	def self.import_chaps
-		images = Dir.new("public/chaps").entries
-		# puts images
-		images.each do |i|
-			image = "public/chaps/#{i}"
-			# puts image
-			
-			begin
-				# puts 'exif'
-				image_info = EXIFR::JPEG.new(image)
-				
-				# puts 'create photo'
-				photo = Photo.new(:image => File.new(image),
-													:user_id => 1)
-				photo.taken_at = MailProcessor.taken_at(image_info)
-				photo.camera_model = 'iPhone'
-				photo.latitude = MailProcessor.dms_degrees(image_info.exif.gps_latitude, image_info.exif.gps_latitude_ref) if image_info.exif.gps_latitude
-				photo.longitude = MailProcessor.dms_degrees(image_info.exif.gps_longitude, image_info.exif.gps_longitude_ref) if image_info.exif.gps_longitude
-				photo.save
-				# puts 'photo saved'
-				
-			rescue => e
-				# puts e
-			end
-		end
-	end
-	
 	def self.dms_degrees(dms, ref)
 		final = dms[0] + (dms[1].to_f / 60) + (dms[2] / 3600)
 		final = -final if %w(S W).include?(ref)

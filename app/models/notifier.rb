@@ -5,7 +5,6 @@ class Notifier < ActionMailer::Base
     subject    '[PhotoBagel] Welcome to PhotoBagel'
     recipients user.full_email
     from       'chap@photobagel.com'
-		bcc        'chap@photobagel.com'
     body       :user => user
   end
 
@@ -13,7 +12,6 @@ class Notifier < ActionMailer::Base
     subject    '[PhotoBagel] You already sent us a photo for this day.'
     recipients user.full_email
     from       'chap@photobagel.com'
-		bcc        'chap@photobagel.com'
     body       :user => user,
 							 :photo => photo
   end
