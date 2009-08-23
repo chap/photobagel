@@ -29,15 +29,15 @@ end
 namespace :mail_fetcher do
   desc "Start mail_fetcher process" 
   task :start, :roles => :app do
-		run "cd #{current_path}; RAILS_ENV=production script/mail_fetcher stop"
-		run "cd #{current_path}; RAILS_ENV=production script/mail_fetcher stop"
-    run "cd #{current_path}; RAILS_ENV=production script/mail_fetcher start" 
+		sudo "cd #{current_path}; RAILS_ENV=production script/mail_fetcher stop"
+		sudo "cd #{current_path}; RAILS_ENV=production script/mail_fetcher stop"
+    sudo "cd #{current_path}; RAILS_ENV=production script/mail_fetcher start" 
   end
 
   desc "Stop mail_fetcher process" 
   task :stop, :roles => :app do
-    run "cd #{current_path}; RAILS_ENV=production script/mail_fetcher stop"
-		run "cd #{current_path}; RAILS_ENV=production script/mail_fetcher stop" 
+    sudo "cd #{current_path}; RAILS_ENV=production script/mail_fetcher stop"
+		sudo "cd #{current_path}; RAILS_ENV=production script/mail_fetcher stop" 
   end
 
   desc "Restart delayed_job process" 
