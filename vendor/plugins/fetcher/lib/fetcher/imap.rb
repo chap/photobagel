@@ -36,7 +36,7 @@ module Fetcher
     
     # Retrieve messages from server
     def get_messages
-			Rails.logger.info 'getting the messages'
+			ActiveRecord::Base.logger << 'getting the messages'
       @connection.select('INBOX')
       @connection.uid_search(['ALL']).each do |uid|
         msg = @connection.uid_fetch(uid,'RFC822').first.attr['RFC822']
