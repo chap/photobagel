@@ -36,16 +36,16 @@ module Fetcher
     
     # Retrieve messages from server
     def get_messages
-			puts 'getting messages'
+			# puts 'getting messages'
       @connection.select('INBOX')
       @connection.uid_search(['ALL']).each do |uid|
         msg = @connection.uid_fetch(uid,'RFC822').first.attr['RFC822']
         begin
-					puts 'processing message...'
+					# puts 'processing message...'
           process_message(msg)
           add_to_processed_folder(uid) if @processed_folder
         rescue => ex
-					puts "error: #{ex}"
+					# puts "error: #{ex}"
           handle_bogus_message(msg)
         end
         # Mark message as deleted 
