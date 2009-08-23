@@ -18,13 +18,13 @@ namespace :photobagel do
   desc "Starts mail fetcher"
 	task :start, :roles => :app do
 		puts 'Starting the mail fetcher'
-		run "RAILS_ENV=production #{current_path}/script/mail_fetcher start"
+		sudo "RAILS_ENV=production #{current_path}/script/mail_fetcher start"
 	end
 	
 	desc "Stops mail fetcher"
 	task :stop, :roles => :app do
 		puts 'Stopping the mail fetcher'
-		run "RAILS_ENV=production #{current_path}/script/mail_fetcher stop"
+		sudo "RAILS_ENV=production #{current_path}/script/mail_fetcher stop"
 	end
 	
 	desc "Restarting mod_rails with restart.txt"
