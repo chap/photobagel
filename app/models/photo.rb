@@ -12,7 +12,7 @@ class Photo < ActiveRecord::Base
   
   validates_attachment_size :image, :in => 100..2000.kilobytes
 
-	def to_params
+	def to_param
 		taken_at
 	end
 end
