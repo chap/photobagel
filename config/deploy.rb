@@ -13,18 +13,26 @@ role :app, "69.164.192.66"
 role :web, "69.164.192.66"
 role :db,  "69.164.192.66", :primary => true
 
-namespace :deploy do
+namespace :photobagel do
+ 
+  desc "Starts mail fetcher"
+	task :start, :roles => :app do
+		puts 'Starting the mail fetcher'
+		run "RAILS_ENV=production #{current_path}/script/mail_fetcher start"
+	end
 	
-  desc "Restarting mod_rails with restart.txt"
+	desc "Stops mail fetcher"
+	task :stop, :roles => :app do
+		puts 'Stopping the mail fetcher'
+		run "RAILS_ENV=production #{current_path}/script/mail_fetcher stop"
+	end
+	
+	desc "Restarting mod_rails with restart.txt"
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "touch #{current_path}/tmp/restart.txt"
+		photobagel.stop
+		photobagel.start
   end
- 
-  [:start, :stop].each do |t|
-    desc "#{t} task is a no-op with mod_rails"
-    task t, :roles => :app do ; end
-  end
+
+	after "deploy:restart" , "photobagel:restart"
 end
-
-
-"RAILS_ENV=production script/mail_fetcher start"
