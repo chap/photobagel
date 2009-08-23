@@ -5,7 +5,8 @@ html, body {
 
 h4.month {
 	padding: .5em;
-	
+	color: #fff;
+	font-weight: normal;
 }
 
 h3 {
