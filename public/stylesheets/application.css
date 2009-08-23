@@ -14,6 +14,7 @@ span.highlight {
 	font-weight: bold;
 	padding: .1em;
 	letter-spacing: 1px;
+	vertical-align: ;
 }
 
 #hd {
@@ -71,7 +72,7 @@ h1 {
 
 
 h2 {
-	font-size: 131%;
+	font-size: 116%;
 }
 
 h1 span {

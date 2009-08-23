@@ -20,7 +20,7 @@ class MailProcessor < ActionMailer::Base
 		images.each do |image|
 			begin
 				image_info = EXIFR::JPEG.new(image)
-				exisiting_photo = Photo.find_by_taken_at(MailProcessor.taken_at(image_info))
+				exisiting_photo = Photo.find_by_taken_at(MailProcessor.taken_at(image, image_info))
 				
 				photo = user.photos.new(:name => mms.subject,
 														 :description => mms.body,
@@ -64,7 +64,7 @@ class MailProcessor < ActionMailer::Base
 		images.each do |image|
 			begin
 				image_info = EXIFR::JPEG.new(image)
-				exisiting_photo = Photo.find_by_taken_at(MailProcessor.taken_at(image_info))
+				exisiting_photo = Photo.find_by_taken_at(MailProcessor.taken_at(image, image_info))
 				
 				photo = user.photos.new(:name => mms.subject,
 														 :description => mms.body,
