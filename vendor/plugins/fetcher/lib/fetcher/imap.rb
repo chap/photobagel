@@ -5,8 +5,8 @@ module Fetcher
     
     PORT = 143
 
-		#@logger = Logger.new("#{RAILS_ROOT}/log/queue.#{Rails.env}.log")
-		#@logger.level = Logger::INFO
+		@logger = Logger.new("#{RAILS_ROOT}/log/mails.#{Rails.env}.log")
+		@logger.level = Logger::INFO
     
     protected
     
@@ -43,12 +43,13 @@ module Fetcher
       @connection.uid_search(['ALL']).each do |uid|
         msg = @connection.uid_fetch(uid,'RFC822').first.attr['RFC822']
         begin
+					@logger.info("Processing msg")
           process_message(msg)
           add_to_processed_folder(uid) if @processed_folder
         rescue => ex
-					# sys logger
-					Rails.logger.info 'something went wrong'
-					Rails.logger.error(ex)
+					@logger.info("Something went wrong")
+					#Rails.logger.info 'something went wrong'
+					#Rails.logger.error(ex)
           handle_bogus_message(msg)
         end
         # Mark message as deleted 
