@@ -14,9 +14,12 @@ role :web, "69.164.192.66"
 role :db,  "69.164.192.66", :primary => true
 
 namespace :deploy do
+	run "RAILS_ENV=production script/mail_fetcher stop"
+	
   desc "Restarting mod_rails with restart.txt"
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "touch #{current_path}/tmp/restart.txt"
+		run "RAILS_ENV=production script/mail_fetcher start"
   end
  
   [:start, :stop].each do |t|
