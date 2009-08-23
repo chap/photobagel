@@ -43,6 +43,8 @@ module Fetcher
           process_message(msg)
           add_to_processed_folder(uid) if @processed_folder
         rescue => ex
+					# sys logger
+					Rails.logger 'something went wrong'
 					Rails.logger.error(ex)
           handle_bogus_message(msg)
         end
