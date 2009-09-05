@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
 		else
 			start = (newest_photo.taken_at - 2.months).beginning_of_month
 		end
-		d = (start..(newest_photo.taken_at)).to_a.map{|x| x}.reverse
+		d = (start..(newest_photo.taken_at.end_of_month)).to_a.map{|x| x}.reverse
 	end
 	
 	def months
