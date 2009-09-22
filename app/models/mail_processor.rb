@@ -34,7 +34,7 @@ class MailProcessor < ActionMailer::Base
 				if exisiting_photo
 					# puts 'Duplicate photo found. Deleting and sending warning email.'
 					exisiting_photo.destroy
-					Notifier.deliver_duplicate(user, photo)
+					#Notifier.deliver_duplicate(user, photo)
 				end
 			rescue => e
 				# puts e

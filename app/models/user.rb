@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
 	#	Notifier.deliver_welcome(self)
 	#end
 	
+	#named_scope :local
+	
 	def	to_param
 		permalink
 	end
